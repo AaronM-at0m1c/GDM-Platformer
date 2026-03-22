@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+        CoinPoolManager.Instance.ResetAllCoins();
         score = 0;
         health  = 100;
     }
