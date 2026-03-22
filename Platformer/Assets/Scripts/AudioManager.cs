@@ -26,6 +26,8 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         PlayMusic(backgroundMusic);
+        GameManager.Instance.onScoreChanged += OnScoreChanged;
+        GameManager.Instance.onHealthChanged += OnHealthChanged;
     }
     
     public void PlayMusic(AudioClip clip)
@@ -40,13 +42,22 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShot(clip);
     }
 
-void OnEnable()
-{
-    GameManager.Instance.onScoreChanged += OnScoreChanged;
-    GameManager.Instance.onHealthChanged += OnHealthChanged;
-}
+    void OnDestroy()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.onScoreChanged -= OnScoreChanged;
+            GameManager.Instance.onHealthChanged -= OnHealthChanged;
+        }
+    }
 
-void OnDisable()
+    //void OnEnable()
+    //{
+    //GameManager.Instance.onScoreChanged += OnScoreChanged;
+    //GameManager.Instance.onHealthChanged += OnHealthChanged;
+    //}
+
+    void OnDisable()
 {
     GameManager.Instance.onScoreChanged -= OnScoreChanged;
     GameManager.Instance.onHealthChanged -= OnHealthChanged;

@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-            Debug.Log("Trigger entered: " + other.gameObject.name + " tag: " + other.tag);
+        Debug.Log("Trigger entered: " + other.gameObject.name + " tag: " + other.tag);
         if (other.CompareTag("Coin"))
         {
             GameManager.Instance.AddScore(10);
